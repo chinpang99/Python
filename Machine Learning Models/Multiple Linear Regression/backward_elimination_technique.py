@@ -41,7 +41,7 @@ X = np.append(arr = np.ones((50, 1)).astype(int), values = X, axis = 1)
 X_opt = X[:, [0, 1, 2, 3, 4, 5]] # Step 2: Fit the full model with all possible predictors
 X_opt = X_opt.astype(np.float64)
 regressor_OLS = sm.OLS(endog = y, exog = X_opt).fit() 
-regressor_OLS.summary() # View the P-Values of each predictors. If the P-Value > SL (0.5), then remove
+regressor_OLS.summary() # View the P-Values of each predictors. If the P-Value > SL (0.05), then remove
 X_opt = X[:, [0, 1, 3, 4, 5]] # Removed feature 2 as the P-Value is > SL
 X_opt = X_opt.astype(np.float64)
 regressor_OLS = sm.OLS(endog = y, exog = X_opt).fit()

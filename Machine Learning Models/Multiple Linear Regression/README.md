@@ -12,11 +12,11 @@
    - Preparing for Backward Elminination
 
 2. Backward Elimination 
-  Step 1: Select the significantl level to stay in the model
-  Step 2: Fit the full model with all possible predictors
-  Step 3: Consider the predictor with the highest P-value. If P-value is significant than significance value. Proceed to step 4
-  Step 4: Remove the predictor
-  Step 5: Fit model without this variable* => It might need to rebuild the whole model after remove the variables. After removed then back to step 3 onwards. 
+   Step 1: Select the significantl level to stay in the model
+   Step 2: Fit the full model with all possible predictors
+   Step 3: Consider the predictor with the highest P-value. If P-value is significant than significance value. Proceed to step 4
+   Step 4: Remove the predictor
+   Step 5: Fit model without this variable* => It might need to rebuild the whole model after remove the variables. After removed then back to step 3 onwards. 
 
 3. Forward Selection
   Step 1: Select a significance level to enter the model 

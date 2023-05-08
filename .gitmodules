@@ -1,0 +1,3 @@
+[submodule "Natural Language Processing/emot_github"]
+	path = Natural Language Processing/emot_github
+	url = https://github.com/NeelShah18/emot.git

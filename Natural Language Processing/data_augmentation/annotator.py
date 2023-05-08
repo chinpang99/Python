@@ -194,7 +194,7 @@ Bot gelmesinin sebebi şuanda aktif olarak liginizin eşleşme dercesinde aktif 
 请根据上面的例子，判断下面的句子是否是AI机器人数量的讨论，请给出原"'''
     prompt_suffix = '''"'''
     annotator = ModelAnnotator.create_annotator(prompt_prefix, prompt_suffix, "ChatGPT")
-    api_key = "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"
+    api_key = ""
     annotator.set_api_key(api_key)
 
     content = '''re there many bots in hok or is it just me, I feel like there are bots even though I'm gold 3'''

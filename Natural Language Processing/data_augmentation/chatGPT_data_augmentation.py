@@ -139,32 +139,3 @@ class chatGPT_data_augmentation:
         final2_arr.append(final_dict)
         return final2_arr
     
-
-# if __name__ == "__main__":
-
-#     import argparse
-    
-
-#     def init_args():
-#         parser = argparse.ArgumentParser()
-#         # basic settings
-#         parser.add_argument("--input_path", default=f"/Users/chinpangchia/Desktop/Tencent_Git/test.anno_chatgpt.csv", type=str, help="")
-#         args = parser.parse_args()
-
-#         return args
-    
-#     args = init_args()
-#     final2_arr = []
-#     if args.input_path.split('.')[-1] == 'csv':
-#         df1 = pd.read_csv(args.input_path)
-#         df1.drop_duplicates(subset="content",keep="first", inplace=True)
-#         for index, row in tqdm(df1.iterrows(), total=df1.shape[0]):
-#             final2_arr = data_augmentation(row['content'], row['triplet'], final2_arr)
-#     elif args.input_path.split('.')[-1] == 'txt':
-#         with open(args.input_path, 'r') as f:
-#             for line in tqdm(f, colour="red"):
-#                 triplet,sentence = eval(line)
-#                 final2_arr = data_augmentation(sentence, str(triplet), final2_arr)
-    
-#     with open("data2.json", "w") as f:
-#         json.dump(final2_arr, f, ensure_ascii=False, indent=4)

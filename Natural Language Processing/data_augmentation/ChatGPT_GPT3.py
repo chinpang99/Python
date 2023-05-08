@@ -63,8 +63,7 @@ if __name__ == "__main__":
 
     # GPT3 Script
     # Get OpenAI API Key from this link >> https://beta.openai.com/account/api-keys
-    openai.api_key = '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'
-
+    openai.api_key = ''
     for filename in os.listdir(args.input_path):
       if not filename.endswith(".xlsx"):
         continue

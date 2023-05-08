@@ -159,7 +159,7 @@ if __name__ == "__main__":
                             help="The name of the task, selected from: [ChatGPT, GPT3, ChatGPTWeb]")
         parser.add_argument("--input_path", default=f"/Users/{user_environment}/Desktop/Tencent_Git/test.anno_chatgpt.csv", type=str, help="")
         parser.add_argument("--column", default="content", type=str, help="")
-        parser.add_argument("--api_key", default="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", type=str, help="")
+        parser.add_argument("--api_key", default="", type=str, help="")
         parser.add_argument("--pause_time", default=0.5, type=float, help="")
         args = parser.parse_args()
 

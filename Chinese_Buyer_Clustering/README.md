@@ -1,0 +1,3 @@
+# Chinese Buyer Clustering Analysis by Applying K-Means, K-Medoids and K-Prototypes Model
+
+The objective of this project was to cluster Chinese buyers into distinct clusters to analyze their behavior in online shopping. I conducted data visualization using matplotlib to gain deeper insights into the data. Subsequently, I implemented clustering algorithms, including K-Means, K-Medoids, and K-Prototypes, and performed the Elbow test to determine the optimal number of clusters. Through this analysis, we discovered that K-Prototypes exhibited superior accuracy and proved to be the most suitable algorithm for this project.

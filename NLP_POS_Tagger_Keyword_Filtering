@@ -1,0 +1,100 @@
+import pandas as pd
+import numpy as np
+from fuzzywuzzy import fuzz
+from collections import Counter
+from datetime import datetime
+import nltk
+import re
+
+#nltk.download('punkt)
+#nltk.download('averaged_perceptron_tagger')
+
+df = pd.read_csv("kw_tagging_7.1.2022.12.00pm.csv", low_memory = False)
+df.fillna("nan",inplace=True)
+kw_lst = ["Keyword"+str(i) for i in range(3,141+1)]
+
+# function to check each keyword 
+def check_keyword(brand_name, username, kw):
+    ori_kw = kw
+    kw = kw.lower()
+    brand_clean = brand_name.lower().replace("official","").replace("store","").replace("malaysia","").replace("shop","").replace("flagship","")
+    brand_clean = re.sub(r'[^\w\s]','',brand_clean).strip()
+    brand_lst = brand_clean.split()
+    username_clean = username.lower().replace("os","").replace("my","").replace("_","").replace("official","").replace("store","").replace("malaysia","")
+    username_clean = re.sub(r'[^\w\s]','',username_clean).strip()
+    username_lst = username_clean.split()
+
+    if kw !='nan':
+        
+        brand_ratio = fuzz.ratio(kw, brand_clean)
+        username_ratio = fuzz.ratio(kw, username_clean)
+        
+        # if the kw matches either the shopname/ username > 90, it is very likely just a variation/typo of the brand
+        if brand_ratio >=80 or username_ratio >= 80:
+            print(f"keyword: {kw} | brand: {brand_clean} ratio: {brand_ratio} | username: {username_clean} ratio: {username_ratio}")
+            kw = ori_kw
+        
+        
+        elif len(kw.split()) == 1 and (brand_ratio >= 50 or username_ratio >= 50):
+            # if the kw is only length 1 and the ratio >= 50, maybe the kw has .os, .my etc
+            kw = kw.replace(".os","").replace(".my","").replace("official","").replace("store","")
+            brand_ratio = fuzz.ratio(kw, brand_clean)
+            username_ratio = fuzz.ratio(kw, username_clean)
+            
+            if  brand_ratio >= 90 or username_ratio >= 90:
+                kw = ori_kw
+            
+            else:
+                kw = ""
+        elif len(kw.split()) == 2:
+            tag = nltk.pos_tag(kw.split())
+            brand_ratio = fuzz.ratio(kw.split()[0], brand_clean)
+            username_ratio = fuzz.ratio(kw.split()[0], username_clean)
+            #print(tag)
+            if ((brand_ratio >=90 or username_ratio >= 90) and tag[1][1] == 'NNP'):
+                kw = ori_kw
+                
+            else: kw = ""
+        
+        # if the kw is longer than 3 words, it is likely the first 2 words are the brand names
+        elif len(kw.split()) >= 3:
+            kw_first2 = ' '.join(kw.split()[0:2])
+            tag = nltk.pos_tag(kw.split())
+            #print(tag)
+            brand_ratio = fuzz.ratio(kw_first2, brand_clean)
+            username_ratio = fuzz.ratio(kw_first2, username_clean)
+            brand_ratio2 = fuzz.ratio(kw.split()[0], brand_clean)
+            username_ratio2 = fuzz.ratio(kw.split()[0], username_clean)
+            if (((brand_ratio >=90 or username_ratio >= 90) or (brand_ratio2 >=90 or username_ratio2 >= 90)) and (tag[2][1] == 'NNP' )):
+                kw = ori_kw
+                #print(f"keyword: {kw}, {kw_first2} | brand: {brand_clean} ratio: {brand_ratio} | username: {username_clean} ratio: {username_ratio}")
+            else:
+                kw = ""
+        else:
+            print(f"keyword: {kw} | brand: {brand_clean} ratio: {brand_ratio} | username: {username_clean} ratio: {username_ratio}")
+
+    else:
+        
+        kw = ""
+    return kw
+
+
+if __name__ == '__main__':
+    start_time = datetime.now()
+    for k in kw_lst:
+        df[k] = df.apply(lambda row: check_keyword(row['Brand Name'], row['Username'], row[k]), axis=1)
+    print(f"Time taken: {round((datetime.now()-start_time).total_seconds()/60, 2)} minutes")
+    print(df.head())
+    df.to_csv("cleaned_tagging.csv", index = False)
+
+
+#kw = "hook clothing high waist pants"
+#lower = kw.lower()
+#tokens = nltk.word_tokenize(lower)
+#tags = nltk.pos_tag(tokens)
+#print(tags)
+#dist = Levenshtein.distance("hookclothing", "hookclothing")
+#print(dist)
+#dist2 = SequenceMatcher(None, "hook", "hookclothing").ratio()
+#print(dist2)
+#        

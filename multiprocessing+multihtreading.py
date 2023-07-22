@@ -13,7 +13,7 @@ proxy_lum = {'http': 'http://127.0.0.1:24000','https': 'http://127.0.0.1:24000'}
 
 def validate_FBL(index,shopid,sellerid,total_count):
     logger.info("Now in thread:" + str(index))
-    FBL_api = 'https://www.lazada.com.my/shop/site/api/seller/products?shopId={shopid}&sellerId={sellerid}'.format(shopid=shopid,sellerid=sellerid)
+    FBL_api = FNCTION STARTS HERE
     retries = 0
     while retries <= 6:
         try:
@@ -49,7 +49,7 @@ def collect_LazBonus_result(result):
     final_result.extend(result)
 
 if __name__ == "__main__":
-    path = r"C:\Users\kelvin.leong\Desktop\Lazada\11.11 Scrape list_output (After remove duplicate).csv"
+    path = {FILE_PATH}
     df = pd.read_csv(path)
     df = df.loc[:3000][["Shop ID","Seller ID"]]
     print(df)

@@ -14,7 +14,5 @@ With the increasing use of social media, the spread of fake news has become a si
 - Evaluates model performance using metrics like accuracy, precision, recall, and F1-score.
 - Provides an intuitive user interface for real-time fake news classification. Below are the examples of screenshot from the system:
 ![Alt text](image.png)
-
 ![Alt text](image-1.png)
-
 ![Alt text](image-2.png)
